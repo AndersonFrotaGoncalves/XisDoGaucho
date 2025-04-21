@@ -136,22 +136,22 @@ addressInput.addEventListener("input", function (Event) {
 checkoutBtn.addEventListener("click", function () {
 
 
-    // const isOpen = checkRestaurantOpen();
-    // if(!isOpen){
-    //    Toastify({
-    //     text: "Lamentamos, mas o restaurante encontra-se fechado no momento. Volte a visitar-nos em breve!",
-    //     duration: 3000,
-    //     close: true,
-    //     gravity: "top", // `top` or `bottom`
-    //     position: "right", // `left`, `center` or `right`
-    //     stopOnFocus: true, // Prevents dismissing of toast on hover
-    //     style: {
-    //       background: "#ef4444",
-    //     },
-    //    }).showToast();
+    const isOpen = checkRestaurantOpen();
+    if(!isOpen){
+       Toastify({
+        text: "Lamentamos, mas o restaurante encontra-se fechado no momento. Volte a visitar-nos em breve!",
+        duration: 3000,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "#ef4444",
+        },
+       }).showToast();
        
-    //     return;
-    // }
+        return;
+    }
 
     if (cart.length === 0) return;
     if (addressInput.value === "") {
@@ -160,28 +160,29 @@ checkoutBtn.addEventListener("click", function () {
         return;
     }
 
-    //Enviar o pedido para api 
-    const cartItems = cart.map((item) => {
-        return (
-            `${item.name} Quantidade: (${item.quantity}) preço: €${item.price.toFixed(2)} |`
-        )
-    }).join("")
+  //Enviar o pedido para api 
+  const cartItems = cart.map((item) => {
+    return (
+        `${item.name} Quantidade: (${item.quantity}) preço: €${item.price.toFixed(2)} |`
+    )
+}).join("")
 
-    // Calcular valor total das compras
-    const totalValue = cart.reduce((acc, item) => {
-        return acc + item.price * item.quantity;
-    }, 0);
-    
-    
-    // Montar mensagem com o total
-    const message = encodeURIComponent(`${cartItems} Total:€ ${totalValue.toFixed(2)}`)
+// Calcular valor total das compras
+const totalValue = cart.reduce((acc, item) => {
+    return acc + item.price * item.quantity;
+}, 0);
 
-    const phone = "351961619937"
-    window.open(`https://wa.me/${phone}?text=${message} | Endereço: ${addressInput.value}`, "_blank")
 
-    cart = [];
-    updateCartModal();
+// Montar mensagem com o total
+const message = encodeURIComponent(`${cartItems} Total:€ ${totalValue.toFixed(2)}`)
+
+const phone = "351961619937"
+window.open(`https://wa.me/${phone}?text=${message} | Endereço: ${addressInput.value}`, "_blank")
+
+cart = [];
+updateCartModal();
 })
+
 
 
 //Veririfcar se o restaurante esta aberto

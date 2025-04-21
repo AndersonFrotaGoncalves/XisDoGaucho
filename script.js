@@ -136,22 +136,22 @@ addressInput.addEventListener("input", function (Event) {
 checkoutBtn.addEventListener("click", function () {
 
 
-    const isOpen = checkRestaurantOpen();
-    if(!isOpen){
-       Toastify({
-        text: "Lamentamos, mas o restaurante encontra-se fechado no momento. Volte a visitar-nos em breve!",
-        duration: 3000,
-        close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        style: {
-          background: "#ef4444",
-        },
-       }).showToast();
+    // const isOpen = checkRestaurantOpen();
+    // if(!isOpen){
+    //    Toastify({
+    //     text: "Lamentamos, mas o restaurante encontra-se fechado no momento. Volte a visitar-nos em breve!",
+    //     duration: 3000,
+    //     close: true,
+    //     gravity: "top", // `top` or `bottom`
+    //     position: "right", // `left`, `center` or `right`
+    //     stopOnFocus: true, // Prevents dismissing of toast on hover
+    //     style: {
+    //       background: "#ef4444",
+    //     },
+    //    }).showToast();
        
-        return;
-    }
+    //     return;
+    // }
 
     if (cart.length === 0) return;
     if (addressInput.value === "") {

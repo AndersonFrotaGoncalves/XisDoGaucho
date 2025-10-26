@@ -752,8 +752,11 @@ video {
 }
 
 .bg-home {
-  background-image: url('/assets/fotogaucho.jpg');
+  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)), url('/assets/LOGO5.jpg');
+  background-size: cover;
+  background-position: center;
 }
+
 
 .bg-cover {
   background-size: cover;

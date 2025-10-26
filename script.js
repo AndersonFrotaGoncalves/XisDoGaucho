@@ -45,15 +45,12 @@ function addToCart(name, price) {
     if (existingItem) {
         //se o otem ja esxistir, aumentar a quantidade
         existingItem.quantity += 1;
-
-        //se o item nao existir, adcionar ao carrinho
     } else {
         cart.push({
             name,
             price,
             quantity: 1,
         })
-
     }
 
     updateCartModal()
@@ -92,18 +89,13 @@ function updateCartModal() {
     });
 
     cartCounter.innerText = cart.length;
-
 }
 
-
 //funcao remover item do carrinho
-
 cartItemsContainer.addEventListener("click", function (Event) {
     if (Event.target.classList.contains("remove-from-cart-btn")) {
         const name = Event.target.getAttribute("data-name")
-
         removeItemCart(name);
-
     }
 })
 
@@ -132,9 +124,8 @@ addressInput.addEventListener("input", function (Event) {
     }
 })
 
-//finalizar pedido "posso comentar aqui para testar o carrinho"
-checkoutBtn.addEventListener("click", function () {
-
+//finalizar pedido usando WhatsApp Cloud API
+checkoutBtn.addEventListener("click", async function () {
 
     const isOpen = checkRestaurantOpen();
     if(!isOpen){
@@ -142,9 +133,9 @@ checkoutBtn.addEventListener("click", function () {
         text: "Lamentamos, mas o restaurante encontra-se fechado no momento. Volte a visitar-nos em breve!",
         duration: 3000,
         close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
         style: {
           background: "#ef4444",
         },
@@ -160,30 +151,56 @@ checkoutBtn.addEventListener("click", function () {
         return;
     }
 
-  //Enviar o pedido para api 
-  const cartItems = cart.map((item) => {
-    return (
-        `${item.name} Quantidade: (${item.quantity}) preço: €${item.price.toFixed(2)} |`
-    )
-}).join("")
+    // Montar mensagem do pedido
+    const cartItems = cart.map(item => `${item.name} Quantidade: (${item.quantity}) preço: €${item.price.toFixed(2)}`).join("\n");
+    const totalValue = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const message = `Novo pedido:\n${cartItems}\nTotal: €${totalValue.toFixed(2)}\nEndereço: ${addressInput.value}`;
 
-// Calcular valor total das compras
-const totalValue = cart.reduce((acc, item) => {
-    return acc + item.price * item.quantity;
-}, 0);
+    // Enviar pedido via WhatsApp Cloud API
+    try {
+        await fetch("https://graph.facebook.com/v17.0/YOUR_PHONE_NUMBER_ID/messages", {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer YOUR_ACCESS_TOKEN",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                messaging_product: "whatsapp",
+                to: "351961619937", // número do estabelecimento
+                type: "text",
+                text: {
+                    body: message
+                }
+            })
+        });
 
+        Toastify({
+            text: "Pedido enviado com sucesso!",
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            stopOnFocus: true,
+            style: { background: "#22c55e" }
+        }).showToast();
 
-// Montar mensagem com o total
-const message = encodeURIComponent(`${cartItems} Total:€ ${totalValue.toFixed(2)}`)
+        // Limpar carrinho
+        cart = [];
+        updateCartModal();
 
-const phone = "351961619937"
-window.open(`https://wa.me/${phone}?text=${message} | Endereço: ${addressInput.value}`, "_blank")
-
-cart = [];
-updateCartModal();
+    } catch (error) {
+        console.error("Erro ao enviar pedido:", error);
+        Toastify({
+            text: "Erro ao enviar pedido. Tente novamente.",
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            stopOnFocus: true,
+            style: { background: "#ef4444" }
+        }).showToast();
+    }
 })
-
-
 
 //Veririfcar se o restaurante esta aberto
 function checkRestaurantOpen() {

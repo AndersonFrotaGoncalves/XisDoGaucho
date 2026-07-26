@@ -14,6 +14,7 @@ const customerNameInput = document.getElementById("customer-name")
 const customerPhoneInput = document.getElementById("customer-phone")
 const paymentMethodInput = document.getElementById("payment-method")
 const orderNotesInput = document.getElementById("order-notes")
+
 // Número do estabelecimento (formato internacional, sem + nem espaços)
 const WHATSAPP_NUMBER = "351961620295";
 
@@ -41,24 +42,16 @@ closeModalBtn.addEventListener("click", function () {
 
 // Alterar campos conforme a modalidade escolhida
 orderTypeInputs.forEach(input => {
-
     input.addEventListener("change", function () {
-
         if (this.value === "Entrega") {
-
             deliveryAddressContainer.style.display = "block"
-
         } else {
-
             deliveryAddressContainer.style.display = "none"
-
             addressInput.value = ""
             addressWarn.classList.add("hidden")
             addressInput.classList.remove("border-red-500")
         }
-
     })
-
 })
 
 menu.addEventListener("click", function (Event) {
@@ -156,12 +149,29 @@ function removeItemCart(name) {
     }
 }
 
+// Limpar o contorno de erro assim que o cliente corrige cada campo
 addressInput.addEventListener("input", function (Event) {
-    let inputValue = Event.target.value;
-
-    if (inputValue !== "") {
+    if (Event.target.value !== "") {
         addressInput.classList.remove("border-red-500");
         addressWarn.classList.add("hidden")
+    }
+})
+
+customerNameInput.addEventListener("input", function () {
+    if (this.value.trim() !== "") {
+        this.classList.remove("border-red-500");
+    }
+})
+
+customerPhoneInput.addEventListener("input", function () {
+    if (this.value.trim() !== "") {
+        this.classList.remove("border-red-500");
+    }
+})
+
+paymentMethodInput.addEventListener("change", function () {
+    if (this.value !== "") {
+        this.classList.remove("border-red-500");
     }
 })
 
@@ -204,11 +214,8 @@ checkoutBtn.addEventListener("click", function () {
             gravity: "top",
             position: "right",
             stopOnFocus: true,
-            style: {
-                background: "#ef4444",
-            },
+            style: { background: "#ef4444" },
         }).showToast();
-
         return;
     }
 
@@ -225,95 +232,78 @@ checkoutBtn.addEventListener("click", function () {
         return;
     }
 
-    const selectedOrderType = document.querySelector(
-    'input[name="order-type"]:checked'
-).value;
+    const selectedOrderType = document.querySelector('input[name="order-type"]:checked').value;
 
-if (
-    customerNameInput.value.trim() === "" ||
-    customerPhoneInput.value.trim() === "" ||
-    paymentMethodInput.value === "" ||
-    (
-        selectedOrderType === "Entrega" &&
-        addressInput.value.trim() === ""
-    )
-) {
-    addressWarn.classList.remove("hidden");
+    // Validação: cada campo assinala só o próprio erro
+    let hasError = false;
 
     if (customerNameInput.value.trim() === "") {
         customerNameInput.classList.add("border-red-500");
+        hasError = true;
     }
 
     if (customerPhoneInput.value.trim() === "") {
         customerPhoneInput.classList.add("border-red-500");
-    }
-
-    if (addressInput.value.trim() === "") {
-        addressInput.classList.add("border-red-500");
+        hasError = true;
     }
 
     if (paymentMethodInput.value === "") {
         paymentMethodInput.classList.add("border-red-500");
+        hasError = true;
     }
 
-    return;
-}
+    if (selectedOrderType === "Entrega" && addressInput.value.trim() === "") {
+        addressInput.classList.add("border-red-500");
+        addressWarn.classList.remove("hidden");
+        hasError = true;
+    }
 
-   // Gerar número do pedido
-const orderNumber = generateOrderNumber();
+    if (hasError) {
+        Toastify({
+            text: "Preencha os campos obrigatórios antes de finalizar.",
+            duration: 2500,
+            close: true,
+            gravity: "top",
+            position: "right",
+            stopOnFocus: true,
+            style: { background: "#ef4444" }
+        }).showToast();
+        return;
+    }
 
-// Montar mensagem do pedido
-const cartItems = cart
-    .map(item => `· ${item.name} (x${item.quantity}) — €${(item.price * item.quantity).toFixed(2)}`)
-    .join("\n");
+    // Gerar número do pedido
+    const orderNumber = generateOrderNumber();
+
+    // Montar mensagem do pedido
+    const cartItems = cart
+        .map(item => `· ${item.name} (x${item.quantity}) — €${(item.price * item.quantity).toFixed(2)}`)
+        .join("\n");
     const totalValue = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-let deliveryInformation = "";
+    let deliveryInformation = "";
 
-if (selectedOrderType === "Entrega") {
+    if (selectedOrderType === "Entrega") {
+        deliveryInformation =
+            `🚗 *MODALIDADE: ENTREGA*\n\n` +
+            `👤 *Cliente:*\n${customerNameInput.value.trim()}\n\n` +
+            `📞 *Telefone:*\n${customerPhoneInput.value.trim()}\n\n` +
+            `📍 *ENDEREÇO DE ENTREGA:*\n${addressInput.value.trim()}`;
+    } else {
+        deliveryInformation =
+            `🏪 *MODALIDADE: RETIRADA NO LOCAL*\n\n` +
+            `👤 *Cliente:*\n${customerNameInput.value.trim()}\n\n` +
+            `📞 *Telefone:*\n${customerPhoneInput.value.trim()}\n\n` +
+            `📍 O cliente irá buscar o pedido no estabelecimento.`;
+    }
 
-    deliveryInformation =
-        `🚗 *MODALIDADE: ENTREGA*\n\n` +
-
-        `👤 *Cliente:*\n` +
-        `${customerNameInput.value.trim()}\n\n` +
-
-        `📞 *Telefone:*\n` +
-        `${customerPhoneInput.value.trim()}\n\n` +
-
-        `📍 *ENDEREÇO DE ENTREGA:*\n` +
-        `${addressInput.value.trim()}`;
-
-} else {
-
-    deliveryInformation =
-        `🏪 *MODALIDADE: RETIRADA NO LOCAL*\n\n` +
-
-        `👤 *Cliente:*\n` +
-        `${customerNameInput.value.trim()}\n\n` +
-
-        `📞 *Telefone:*\n` +
-        `${customerPhoneInput.value.trim()}\n\n` +
-
-        `📍 O cliente irá buscar o pedido no estabelecimento.`;
-}
-
-
-const message =
-    `🍔 *NOVO PEDIDO - XIS DO GAÚCHO*\n\n` +
-
-    `📦 *PEDIDO:*\n` +
-    `${cartItems}\n\n` +
-
-    `💰 *TOTAL: €${totalValue.toFixed(2)}*\n\n` +
-
-    `${deliveryInformation}\n\n` +
-
-    `💳 *FORMA DE PAGAMENTO:*\n` +
-    `${paymentMethodInput.value}\n\n` +
-
-    `📝 *OBSERVAÇÕES:*\n` +
-    `${orderNotesInput.value.trim() || "Nenhuma"}`;
+    const message =
+        `🍔 *NOVO PEDIDO - XIS DO GAÚCHO*\n\n` +
+        `🔖 *Nº do Pedido:* ${orderNumber}\n\n` +
+        `📦 *PEDIDO:*\n${cartItems}\n\n` +
+        `💰 *TOTAL: €${totalValue.toFixed(2)}*\n\n` +
+        `${deliveryInformation}\n\n` +
+        `💳 *FORMA DE PAGAMENTO:*\n${paymentMethodInput.value}\n\n` +
+        `📝 *OBSERVAÇÕES:*\n${orderNotesInput.value.trim() || "Nenhuma"}`;
 
     // Gera o link do WhatsApp com a mensagem já preenchida
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
@@ -323,21 +313,18 @@ const message =
 
     // Limpar carrinho e fechar modal
     cart = [];
-updateCartModal();
+    updateCartModal();
 
-customerNameInput.value = "";
-customerPhoneInput.value = "";
-addressInput.value = "";
-paymentMethodInput.value = "";
-orderNotesInput.value = "";
+    customerNameInput.value = "";
+    customerPhoneInput.value = "";
+    addressInput.value = "";
+    paymentMethodInput.value = "";
+    orderNotesInput.value = "";
 
-document.querySelector(
-    'input[name="order-type"][value="Entrega"]'
-).checked = true;
+    document.querySelector('input[name="order-type"][value="Entrega"]').checked = true;
+    deliveryAddressContainer.style.display = "block";
 
-deliveryAddressContainer.style.display = "block";
-
-cartModal.style.display = "none";
+    cartModal.style.display = "none";
 })
 
 //Verificar se o restaurante esta aberto (Sex a Dom, 18:00 as 23:00)

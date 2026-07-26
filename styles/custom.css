@@ -682,3 +682,59 @@ a:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
+
+/* =========================
+   MODALIDADE DO PEDIDO
+========================= */
+
+.order-type-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 1rem;
+}
+
+.order-type-option {
+    cursor: pointer;
+}
+
+.order-type-option input {
+    display: none;
+}
+
+.order-type-card {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.9rem;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.order-type-card:hover {
+    border-color: var(--green);
+}
+
+.order-type-option input:checked + .order-type-card {
+    border-color: var(--green);
+    background: #eef8ef;
+    box-shadow: 0 0 0 1px var(--green);
+}
+
+.order-type-icon {
+    font-size: 1.7rem;
+}
+
+.order-type-card strong {
+    display: block;
+    font-size: 1rem;
+}
+
+.order-type-card small {
+    display: block;
+    margin-top: 0.2rem;
+    color: #777;
+    font-size: 0.8rem;
+}

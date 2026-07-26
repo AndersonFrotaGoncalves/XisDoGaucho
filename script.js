@@ -8,6 +8,8 @@ const closeModalBtn = document.getElementById("close-modal-btn")
 const cartCounter = document.getElementById("cart-count")
 const addressInput = document.getElementById("address")
 const addressWarn = document.getElementById("address-warn")
+const deliveryAddressContainer = document.getElementById("delivery-address-container")
+const orderTypeInputs = document.querySelectorAll('input[name="order-type"]')
 const customerNameInput = document.getElementById("customer-name")
 const customerPhoneInput = document.getElementById("customer-phone")
 const paymentMethodInput = document.getElementById("payment-method")
@@ -35,6 +37,28 @@ cartModal.addEventListener("click", function (Event) {
 
 closeModalBtn.addEventListener("click", function () {
     cartModal.style.display = "none"
+})
+
+// Alterar campos conforme a modalidade escolhida
+orderTypeInputs.forEach(input => {
+
+    input.addEventListener("change", function () {
+
+        if (this.value === "Entrega") {
+
+            deliveryAddressContainer.style.display = "block"
+
+        } else {
+
+            deliveryAddressContainer.style.display = "none"
+
+            addressInput.value = ""
+            addressWarn.classList.add("hidden")
+            addressInput.classList.remove("border-red-500")
+        }
+
+    })
+
 })
 
 menu.addEventListener("click", function (Event) {
@@ -201,11 +225,18 @@ checkoutBtn.addEventListener("click", function () {
         return;
     }
 
-    if (
+    const selectedOrderType = document.querySelector(
+    'input[name="order-type"]:checked'
+).value;
+
+if (
     customerNameInput.value.trim() === "" ||
     customerPhoneInput.value.trim() === "" ||
-    addressInput.value.trim() === "" ||
-    paymentMethodInput.value === ""
+    paymentMethodInput.value === "" ||
+    (
+        selectedOrderType === "Entrega" &&
+        addressInput.value.trim() === ""
+    )
 ) {
     addressWarn.classList.remove("hidden");
 
@@ -237,23 +268,46 @@ const cartItems = cart
     .join("\n");
     const totalValue = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
- const message =
-    `🍔  XIS DO GAÚCHO\n` +
-    `🔢 *Nº DO PEDIDO: ${orderNumber}*\n\n` +
+let deliveryInformation = "";
 
-    `👤 *Cliente:*\n` +
-    `${customerNameInput.value.trim()}\n\n` +
+if (selectedOrderType === "Entrega") {
 
-    `📞 *Telefone:*\n` +
-    `${customerPhoneInput.value.trim()}\n\n` +
+    deliveryInformation =
+        `🚗 *MODALIDADE: ENTREGA*\n\n` +
+
+        `👤 *Cliente:*\n` +
+        `${customerNameInput.value.trim()}\n\n` +
+
+        `📞 *Telefone:*\n` +
+        `${customerPhoneInput.value.trim()}\n\n` +
+
+        `📍 *ENDEREÇO DE ENTREGA:*\n` +
+        `${addressInput.value.trim()}`;
+
+} else {
+
+    deliveryInformation =
+        `🏪 *MODALIDADE: RETIRADA NO LOCAL*\n\n` +
+
+        `👤 *Cliente:*\n` +
+        `${customerNameInput.value.trim()}\n\n` +
+
+        `📞 *Telefone:*\n` +
+        `${customerPhoneInput.value.trim()}\n\n` +
+
+        `📍 O cliente irá buscar o pedido no estabelecimento.`;
+}
+
+
+const message =
+    `🍔 *NOVO PEDIDO - XIS DO GAÚCHO*\n\n` +
 
     `📦 *PEDIDO:*\n` +
     `${cartItems}\n\n` +
 
     `💰 *TOTAL: €${totalValue.toFixed(2)}*\n\n` +
 
-    `📍 *ENDEREÇO DE ENTREGA:*\n` +
-    `${addressInput.value.trim()}\n\n` +
+    `${deliveryInformation}\n\n` +
 
     `💳 *FORMA DE PAGAMENTO:*\n` +
     `${paymentMethodInput.value}\n\n` +
@@ -276,6 +330,12 @@ customerPhoneInput.value = "";
 addressInput.value = "";
 paymentMethodInput.value = "";
 orderNotesInput.value = "";
+
+document.querySelector(
+    'input[name="order-type"][value="Entrega"]'
+).checked = true;
+
+deliveryAddressContainer.style.display = "block";
 
 cartModal.style.display = "none";
 })

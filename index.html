@@ -309,18 +309,77 @@
   class="cart-input" 
 />
 
-<!-- ENDEREÇO -->
-<p class="cart-label">Endereço de entrega:</p>
-<input 
-  type="text" 
-  placeholder="Digite seu endereço completo..." 
-  id="address" 
-  class="cart-input" 
-/>
+<!-- MODALIDADE DO PEDIDO -->
 
-<p class="cart-warn hidden" id="address-warn">
-  Preencha todos os dados obrigatórios!
-</p>
+<p class="cart-label">Como deseja receber o seu pedido?</p>
+
+<div class="order-type-options">
+
+  <label class="order-type-option">
+
+    <input 
+      type="radio" 
+      name="order-type" 
+      value="Entrega"
+      checked
+    >
+
+    <div class="order-type-card">
+
+      <span class="order-type-icon">🚗</span>
+
+      <div>
+        <strong>Entrega</strong>
+        <small>Receber no endereço informado</small>
+      </div>
+
+    </div>
+
+  </label>
+
+
+  <label class="order-type-option">
+
+    <input 
+      type="radio" 
+      name="order-type" 
+      value="Retirada"
+    >
+
+    <div class="order-type-card">
+
+      <span class="order-type-icon">🏪</span>
+
+      <div>
+        <strong>Retirada no local</strong>
+        <small>Vou buscar o pedido no estabelecimento</small>
+      </div>
+
+    </div>
+
+  </label>
+
+</div>
+
+
+<!-- ENDEREÇO DE ENTREGA -->
+
+<div id="delivery-address-container">
+
+  <p class="cart-label">Endereço de entrega:</p>
+
+  <input 
+    type="text" 
+    placeholder="Digite seu endereço completo..." 
+    id="address" 
+    class="cart-input" 
+  />
+
+  <p class="cart-warn hidden" id="address-warn">
+    Digite seu endereço completo!
+  </p>
+
+</div>
 
 <!-- FORMA DE PAGAMENTO -->
 <p class="cart-label">Forma de pagamento:</p>

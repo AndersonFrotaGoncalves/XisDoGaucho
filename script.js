@@ -8,9 +8,15 @@ const closeModalBtn = document.getElementById("close-modal-btn")
 const cartCounter = document.getElementById("cart-count")
 const addressInput = document.getElementById("address")
 const addressWarn = document.getElementById("address-warn")
-
+const customerNameInput = document.getElementById("customer-name")
+const customerPhoneInput = document.getElementById("customer-phone")
+const paymentMethodInput = document.getElementById("payment-method")
+const orderNotesInput = document.getElementById("order-notes")
 // Número do estabelecimento (formato internacional, sem + nem espaços)
 const WHATSAPP_NUMBER = "351961620295";
+
+const ORDER_COUNTER_KEY = "xis-gaucho-order-counter";
+const ORDER_DATE_KEY = "xis-gaucho-order-date";
 
 let cart = [];
 
@@ -135,6 +141,33 @@ addressInput.addEventListener("input", function (Event) {
     }
 })
 
+function generateOrderNumber() {
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+
+    const currentDate = `${year}/${month}/${day}`;
+
+    let counter = Number(localStorage.getItem(ORDER_COUNTER_KEY)) || 0;
+    const savedDate = localStorage.getItem(ORDER_DATE_KEY);
+
+    // Se for um novo dia, reinicia a sequência
+    if (savedDate !== currentDate) {
+        counter = 1;
+        localStorage.setItem(ORDER_DATE_KEY, currentDate);
+    } else {
+        counter += 1;
+    }
+
+    localStorage.setItem(ORDER_COUNTER_KEY, counter);
+
+    const orderNumber = String(counter).padStart(4, "0");
+
+    return `${currentDate}-${orderNumber}`;
+}
+
 //finalizar pedido usando link do WhatsApp (wa.me)
 checkoutBtn.addEventListener("click", function () {
 
@@ -168,23 +201,65 @@ checkoutBtn.addEventListener("click", function () {
         return;
     }
 
-    if (addressInput.value.trim() === "") {
-        addressWarn.classList.remove("hidden");
-        addressInput.classList.add("border-red-500");
-        return;
+    if (
+    customerNameInput.value.trim() === "" ||
+    customerPhoneInput.value.trim() === "" ||
+    addressInput.value.trim() === "" ||
+    paymentMethodInput.value === ""
+) {
+    addressWarn.classList.remove("hidden");
+
+    if (customerNameInput.value.trim() === "") {
+        customerNameInput.classList.add("border-red-500");
     }
 
-    // Montar mensagem do pedido
-    const cartItems = cart
-        .map(item => `- ${item.name} (x${item.quantity}) — €${(item.price * item.quantity).toFixed(2)}`)
-        .join("\n");
+    if (customerPhoneInput.value.trim() === "") {
+        customerPhoneInput.classList.add("border-red-500");
+    }
+
+    if (addressInput.value.trim() === "") {
+        addressInput.classList.add("border-red-500");
+    }
+
+    if (paymentMethodInput.value === "") {
+        paymentMethodInput.classList.add("border-red-500");
+    }
+
+    return;
+}
+
+   // Gerar número do pedido
+const orderNumber = generateOrderNumber();
+
+// Montar mensagem do pedido
+const cartItems = cart
+    .map(item => `· ${item.name} (x${item.quantity}) — €${(item.price * item.quantity).toFixed(2)}`)
+    .join("\n");
     const totalValue = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-    const message =
-        `*Novo pedido - Xis do Gaúcho*\n\n` +
-        `${cartItems}\n\n` +
-        `*Total: €${totalValue.toFixed(2)}*\n\n` +
-        `*Endereço de entrega:*\n${addressInput.value.trim()}`;
+ const message =
+    `🍔  XIS DO GAÚCHO\n` +
+    `🔢 *Nº DO PEDIDO: ${orderNumber}*\n\n` +
+
+    `👤 *Cliente:*\n` +
+    `${customerNameInput.value.trim()}\n\n` +
+
+    `📞 *Telefone:*\n` +
+    `${customerPhoneInput.value.trim()}\n\n` +
+
+    `📦 *PEDIDO:*\n` +
+    `${cartItems}\n\n` +
+
+    `💰 *TOTAL: €${totalValue.toFixed(2)}*\n\n` +
+
+    `📍 *ENDEREÇO DE ENTREGA:*\n` +
+    `${addressInput.value.trim()}\n\n` +
+
+    `💳 *FORMA DE PAGAMENTO:*\n` +
+    `${paymentMethodInput.value}\n\n` +
+
+    `📝 *OBSERVAÇÕES:*\n` +
+    `${orderNotesInput.value.trim() || "Nenhuma"}`;
 
     // Gera o link do WhatsApp com a mensagem já preenchida
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
@@ -194,9 +269,15 @@ checkoutBtn.addEventListener("click", function () {
 
     // Limpar carrinho e fechar modal
     cart = [];
-    updateCartModal();
-    addressInput.value = "";
-    cartModal.style.display = "none";
+updateCartModal();
+
+customerNameInput.value = "";
+customerPhoneInput.value = "";
+addressInput.value = "";
+paymentMethodInput.value = "";
+orderNotesInput.value = "";
+
+cartModal.style.display = "none";
 })
 
 //Verificar se o restaurante esta aberto (Sex a Dom, 18:00 as 23:00)

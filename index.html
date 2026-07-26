@@ -266,7 +266,7 @@
         <a href="https://www.facebook.com/share/1EP5TETi6b/?mibextid=wwXIfr" target="_blank" rel="noopener" class="contact-btn green">
           <i class="fa-brands fa-facebook"></i> Xis Gaúcho Portugal
         </a>
-        <a href="https://wa.me/351961620295" target="_blank" rel="noopener" class="contact-btn gold">
+        <a href="https://wa.me/351961619937" target="_blank" rel="noopener" class="contact-btn gold">
           <i class="fa-brands fa-whatsapp"></i> 961 620 295
         </a>
       </div>
@@ -291,10 +291,56 @@
 
       <p class="cart-total">Total: <span id="cart-total">0.00</span></p>
 
-      <p class="cart-label">Endereço de entrega:</p>
-      <input type="text" placeholder="Digite seu endereço completo..." id="address" class="cart-input" />
+    <!-- NOME DO CLIENTE -->
+<p class="cart-label">Nome:</p>
+<input 
+  type="text" 
+  placeholder="Digite seu nome..." 
+  id="customer-name" 
+  class="cart-input" 
+/>
 
-      <p class="cart-warn hidden" id="address-warn">Digite seu endereço completo!</p>
+<!-- TELEFONE -->
+<p class="cart-label">Telefone:</p>
+<input 
+  type="tel" 
+  placeholder="Digite seu telefone..." 
+  id="customer-phone" 
+  class="cart-input" 
+/>
+
+<!-- ENDEREÇO -->
+<p class="cart-label">Endereço de entrega:</p>
+<input 
+  type="text" 
+  placeholder="Digite seu endereço completo..." 
+  id="address" 
+  class="cart-input" 
+/>
+
+<p class="cart-warn hidden" id="address-warn">
+  Preencha todos os dados obrigatórios!
+</p>
+
+<!-- FORMA DE PAGAMENTO -->
+<p class="cart-label">Forma de pagamento:</p>
+
+<select id="payment-method" class="cart-input">
+  <option value="">Selecione uma forma de pagamento</option>
+  <option value="Dinheiro">💶 Dinheiro</option>
+  <option value="MB WAY">📱 MB WAY</option>
+  <option value="Cartão">💳 Cartão</option>
+</select>
+
+<!-- OBSERVAÇÕES -->
+<p class="cart-label">Observações do pedido:</p>
+
+<textarea 
+  id="order-notes" 
+  class="cart-input" 
+  placeholder="Ex: Sem cebola, tocar à campainha, etc."
+  rows="3"
+></textarea>
 
       <div class="cart-actions">
         <button id="close-modal-btn" class="btn-outline">Fechar</button>

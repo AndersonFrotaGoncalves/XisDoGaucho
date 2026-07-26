@@ -9,6 +9,9 @@ const cartCounter = document.getElementById("cart-count")
 const addressInput = document.getElementById("address")
 const addressWarn = document.getElementById("address-warn")
 
+// Número do estabelecimento (formato internacional, sem + nem espaços)
+const WHATSAPP_NUMBER = "351961620295";
+
 let cart = [];
 
 //abrir o modal do carrinho
@@ -35,7 +38,6 @@ menu.addEventListener("click", function (Event) {
         const price = parseFloat(parentButton.getAttribute("data-price"))
         addToCart(name, price)
     }
-
 })
 
 //funcao para adicionar no carrinho
@@ -43,7 +45,7 @@ function addToCart(name, price) {
     const existingItem = cart.find(item => item.name === name)
 
     if (existingItem) {
-        //se o otem ja esxistir, aumentar a quantidade
+        //se o item ja existir, aumentar a quantidade
         existingItem.quantity += 1;
     } else {
         cart.push({
@@ -54,31 +56,39 @@ function addToCart(name, price) {
     }
 
     updateCartModal()
+
+    Toastify({
+        text: `${name} adicionado ao carrinho!`,
+        duration: 1500,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: { background: "#22c55e" }
+    }).showToast();
 }
 
 //atualizar o carrinho
 function updateCartModal() {
     cartItemsContainer.innerHTML = "";
     let total = 0;
+    let totalQuantity = 0;
 
     cart.forEach(item => {
         const cartItemElement = document.createElement("div")
-        cartItemElement.classList.add("flex", "justify-between", "mb-4", "flex-col")
+        cartItemElement.classList.add("cart-item-row")
 
         cartItemElement.innerHTML = `
-        <div class="flex items-center justify-between">
         <div>
-        <p class="font-medium" >${item.name}</p>
-        <p>Qtd:  ${item.quantity}</p>
-        <p class="font-medium mt-2">€ ${item.price.toFixed(2)}</p>
+        <p class="item-name">${item.name}</p>
+        <p class="item-qty">Qtd: ${item.quantity}</p>
+        <p class="item-price">€ ${item.price.toFixed(2)}</p>
         </div>
-       
-        <button class="remove-from-cart-btn" data-name="${item.name}"> Remover </button>
-        
-        </div>
+        <button class="remove-from-cart-btn" data-name="${item.name}">Remover</button>
         `
 
         total += item.price * item.quantity;
+        totalQuantity += item.quantity;
 
         cartItemsContainer.appendChild(cartItemElement)
     })
@@ -88,7 +98,8 @@ function updateCartModal() {
         currency: "EUR"
     });
 
-    cartCounter.innerText = cart.length;
+    // Mostra a quantidade total de itens, não o número de produtos diferentes
+    cartCounter.innerText = totalQuantity;
 }
 
 //funcao remover item do carrinho
@@ -124,98 +135,89 @@ addressInput.addEventListener("input", function (Event) {
     }
 })
 
-//finalizar pedido usando WhatsApp Cloud API
-checkoutBtn.addEventListener("click", async function () {
+//finalizar pedido usando link do WhatsApp (wa.me)
+checkoutBtn.addEventListener("click", function () {
 
     const isOpen = checkRestaurantOpen();
-    if(!isOpen){
-       Toastify({
-        text: "Lamentamos, mas o restaurante encontra-se fechado no momento. Volte a visitar-nos em breve!",
-        duration: 3000,
-        close: true,
-        gravity: "top",
-        position: "right",
-        stopOnFocus: true,
-        style: {
-          background: "#ef4444",
-        },
-       }).showToast();
-       
-        return;
-    }
-
-    if (cart.length === 0) return;
-    if (addressInput.value === "") {
-        addressWarn.classList.remove("hidden");
-        addressInput.classList.add("border-red-500");
-        return;
-    }
-
-    // Montar mensagem do pedido
-    const cartItems = cart.map(item => `${item.name} Quantidade: (${item.quantity}) preço: €${item.price.toFixed(2)}`).join("\n");
-    const totalValue = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    const message = `Novo pedido:\n${cartItems}\nTotal: €${totalValue.toFixed(2)}\nEndereço: ${addressInput.value}`;
-
-    // Enviar pedido via WhatsApp Cloud API
-    try {
-        await fetch("https://graph.facebook.com/v17.0/YOUR_PHONE_NUMBER_ID/messages", {
-            method: "POST",
-            headers: {
-                "Authorization": "Bearer YOUR_ACCESS_TOKEN",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                messaging_product: "whatsapp",
-                to: "351961619937", // número do estabelecimento
-                type: "text",
-                text: {
-                    body: message
-                }
-            })
-        });
-
+    if (!isOpen) {
         Toastify({
-            text: "Pedido enviado com sucesso!",
+            text: "Lamentamos, mas o restaurante encontra-se fechado no momento. Volte a visitar-nos em breve!",
             duration: 3000,
             close: true,
             gravity: "top",
             position: "right",
             stopOnFocus: true,
-            style: { background: "#22c55e" }
+            style: {
+                background: "#ef4444",
+            },
         }).showToast();
 
-        // Limpar carrinho
-        cart = [];
-        updateCartModal();
+        return;
+    }
 
-    } catch (error) {
-        console.error("Erro ao enviar pedido:", error);
+    if (cart.length === 0) {
         Toastify({
-            text: "Erro ao enviar pedido. Tente novamente.",
-            duration: 3000,
+            text: "O seu carrinho está vazio!",
+            duration: 2500,
             close: true,
             gravity: "top",
             position: "right",
             stopOnFocus: true,
             style: { background: "#ef4444" }
         }).showToast();
+        return;
     }
+
+    if (addressInput.value.trim() === "") {
+        addressWarn.classList.remove("hidden");
+        addressInput.classList.add("border-red-500");
+        return;
+    }
+
+    // Montar mensagem do pedido
+    const cartItems = cart
+        .map(item => `- ${item.name} (x${item.quantity}) — €${(item.price * item.quantity).toFixed(2)}`)
+        .join("\n");
+    const totalValue = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+    const message =
+        `*Novo pedido - Xis do Gaúcho*\n\n` +
+        `${cartItems}\n\n` +
+        `*Total: €${totalValue.toFixed(2)}*\n\n` +
+        `*Endereço de entrega:*\n${addressInput.value.trim()}`;
+
+    // Gera o link do WhatsApp com a mensagem já preenchida
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+    // Abre o WhatsApp (app no telemóvel, ou WhatsApp Web no PC) numa nova aba
+    window.open(whatsappUrl, "_blank");
+
+    // Limpar carrinho e fechar modal
+    cart = [];
+    updateCartModal();
+    addressInput.value = "";
+    cartModal.style.display = "none";
 })
 
-//Veririfcar se o restaurante esta aberto
+//Verificar se o restaurante esta aberto (Sex a Dom, 18:00 as 23:00)
 function checkRestaurantOpen() {
     const data = new Date();
+    const dia = data.getDay();   // 0 = domingo ... 6 = sábado
     const hora = data.getHours();
-    return hora >= 17 && hora < 23;
+
+    const diaAberto = dia === 0 || dia === 5 || dia === 6; // domingo, sexta, sábado
+    const horaAberta = hora >= 18 && hora < 23;
+
+    return diaAberto && horaAberta;
 }
 
 const spanItem = document.getElementById("date-span")
 const isOpen = checkRestaurantOpen();
 
 if (isOpen) {
-    spanItem.classList.remove("bg-red-500");
-    spanItem.classList.add("bg-green-600")
+    spanItem.classList.remove("is-closed");
+    spanItem.classList.add("is-open")
 } else {
-    spanItem.classList.remove("bg-green-600");
-    spanItem.classList.add("bg-red-500")
+    spanItem.classList.remove("is-open");
+    spanItem.classList.add("is-closed")
 }

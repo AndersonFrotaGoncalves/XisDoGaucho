@@ -15,107 +15,87 @@
   <meta property="og:site_name" content="Xis do Gaúcho" />
 
   <link rel="stylesheet" href="./styles/output.css" />
+  <link rel="stylesheet" href="./styles/custom.css" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap"
     rel="stylesheet" />
 
   <title>XIS GAÚCHO</title>
 </head>
 
-<body>
- <!--INICIO HEADER-->
-<header class="relative w-full h-[420px] bg-zinc-900 bg-home bg-cover bg-center overflow-hidden">
-  <br>
-  <!-- Fumaça (colocada ANTES para não ser cortada pela logo) -->
-  <div class="smoke"></div>
-  <div class="smoke delay1"></div>
-  <div class="smoke delay2"></div>
+<body class="paper-texture">
 
-  <div class="w-full h-full flex flex-col justify-center items-center relative z-10">
-    <!-- Logo flutuante -->
-    <img
-  src="./assets/xis do gaucho.jpg"
-  alt="logo dev"
-  class="w-34 h-32 rounded-full shadow-lg hover:scale-110 duration-200 floating"
-/>
-   <!--<h1 class="text-4xl mt-8 mb-8 font-bold text-red-900">XIS GAÚCHO</h1>-->
-   <span class="text-white font-bold"> Tele-entrega e Take-away -Tondela </span>
+  <!--INICIO HERO / CAPA-->
+  <header class="site-header">
+    <div class="hero-corner-wine"></div>
+    <div class="hero-corner-gold"></div>
 
-    <div class="bg-green-600 px-4 py-1 rounded-lg mt-5" id="date-span">
-      <span class="text-white font-medium">
-        Sex a Dom - 18:00 as 23:00
-      </span>
+    <div class="stamp-badge-wrap">
+      <div class="stamp-badge">PRODUTOS<br>FRESCOS<br>FEITOS NA HORA</div>
     </div>
-  </div>
-</header>
-<!--FIM HEADER-->
-  
-  <section class="about-xis max-w-4xl mx-auto px-4 mt-10 mb-10 text-center">
-  <h2 class="text-2xl md:text-3xl font-bold mb-6 text-red-800">
-    Sobre o Xis Gaúcho
-  </h2>
 
-  <p class="about-desc text-gray-700 text-base md:text-lg leading-relaxed">
-    O xis é feito com pão especial de 17 cm, macio e preparado sob encomenda exclusivamente para o Xis Gaúcho. 
-    O hambúrguer prensado cria uma crostinha perfeita, garantindo um sabor único a cada mordida. 
-    Uma experiência inesquecível que conquista novos paladares e aproxima você de uma cultura deliciosa.
-  </p>
-</section>
+    <div class="logo-emblem-wrap">
+      <img src="./assets/logo-emblema.png" alt="Xis Gaúcho" class="logo-emblem" />
+    </div>
 
+    <p class="tagline">Tele-entrega e Take-away · Tondela</p>
 
-         
-  <h2 class="text-2xl md:text-3xl font-bold text-center mt-9 mb-6">
-     Conheça o nosso MENU
-  </h2>
+    <div class="star-divider">
+      <span class="s1">★</span><span class="s2">★</span><span class="s3">★</span>
+    </div>
+
+    <div class="hours-pill" id="date-span">
+      <span>Sex a Dom — 18:00 às 23:00</span>
+    </div>
+
+    <div>
+      <a href="#menu" class="cta-btn">
+        Ver Cardápio
+        <i class="fa fa-arrow-down"></i>
+      </a>
+    </div>
+  </header>
+  <!--FIM HERO / CAPA-->
+
+  <!--INICIO SOBRE-->
+  <section class="section">
+    <span class="brush-banner wine">SOBRE NÓS</span>
+    <h2 class="font-display section-title">O Xis Gaúcho</h2>
+
+    <p class="section-text">
+      O xis é feito com pão especial de 17 cm, macio e preparado sob encomenda exclusivamente para o Xis Gaúcho.
+      O hambúrguer prensado cria uma crostinha perfeita, garantindo um sabor único a cada mordida.
+      Uma experiência inesquecível que conquista novos paladares e aproxima você de uma cultura deliciosa.
+    </p>
+
+    <div class="star-divider">
+      <span class="s1">★</span><span class="s2">★</span><span class="s3">★</span>
+    </div>
+  </section>
+  <!--FIM SOBRE-->
 
   <!--INICIO MENU-->
   <div id="menu">
-    <main class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16">
+    <div class="menu-section-title">
+      <span class="brush-banner green">O NOSSO</span>
+      <h2 class="font-display">CARDÁPIO</h2>
+      <p>Pão especial de 17 cm, prensado e feito na hora.</p>
+    </div>
+
+    <main class="menu-grid">
       <!--INICIO PRODUTO-->
-      <div class="flex gap-2">
-        <img src="./assets/xis guaderio.jpg" alt="Xis Gaudério"
-          class="w-28 h-28 rounded-md hover:scale-110 hover:rotate-2 duration-300" />
-
-        <div>
-          <p class="font-bold">Xis Gaudério</p>
-          <p class="texte-sm">
-          é preparado com pão especial e recheado com ingredientes frescos e saborosos:
-  alface crocante, tomate suculento, milho, ervilha, queijo cheddar derretido, frango, bacon, coração e ovo.
-  Uma combinação perfeita para uma experiência inesquecível a cada mordida!
-          </p>
-
-          <div class="flex items-center gap-2 justify-between mt-3">
-            <p class="font-bold text-lg">9.50€</p>
-            <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Xis Gaudério" data-price="9.50">
-              <i class="fa fa-cart-plus text-lg text-white"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-      <!--FIM PRODUTO-->
-  
-  <!--INICIO MENU-->
-  <div id="menu">
-    <main class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16">
-      <!--INICIO PRODUTO-->
-      <div class="flex gap-2">
-        <img src="./assets/xis carne.jpg" alt="Xis Carne"
-          class="w-28 h-28 rounded-md hover:scale-110 hover:rotate-2 duration-300" />
-
-        <div>
-          <p class="font-bold">Xis Carne</p>
-          <p class="texte-sm">
-          é preparado com pão especial e recheado com ingredientes frescos e saborosos:
-  alface crocante, tomate suculento, milho, ervilha, queijo derretido, bife artesanal suculento, presunto e ovo.
-  Uma combinação perfeita para uma experiência inesquecível a cada mordida!
-          </p>
-
-          <div class="flex items-center gap-2 justify-between mt-3">
-            <p class="font-bold text-lg">8.50€</p>
-            <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Xis Carne" data-price="8.50">
-              <i class="fa fa-cart-plus text-lg text-white"></i>
+      <div class="menu-card">
+        <img src="./assets/xis carne.jpg" alt="Xis Carne" />
+        <div class="menu-card-body">
+          <span class="brush-banner wine">Xis Carne</span>
+          <p class="menu-card-desc">Alface, tomate, milho, ervilha, queijo, bife artesanal, presunto e ovo.</p>
+          <div class="menu-card-footer">
+            <p class="menu-price">9,50€</p>
+            <button class="add-btn add-to-cart-btn" data-name="Xis Carne" data-price="9.50">
+              <i class="fa fa-cart-plus"></i>
             </button>
           </div>
         </div>
@@ -123,22 +103,15 @@
       <!--FIM PRODUTO-->
 
       <!--INICIO PRODUTO-->
-      <div class="flex gap-2">
-        <img src="./assets/xis calabresa.jpg" alt=" Xis Bacon"
-          class="w-28 h-28 rounded-md hover:scale-110 hover:rotate-2 duration-300" />
-
-        <div>
-          <p class="font-bold">Xis Bacon</p>
-          <p class="texte-sm">
-            é preparado com pão especial e recheado com ingredientes frescos e saborosos: 
-  alface crocante, tomate suculento, milho, ervilha, queijo derretido, bife artesanal suculento, bacon na chapa e ovo.
-  Uma combinação perfeita para uma experiência inesquecível a cada mordida!
-          </p>
-
-          <div class="flex items-center gap-2 justify-between mt-3">
-            <p class="font-bold text-lg">8.50€</p>
-            <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Xis Bacon" data-price="8.50">
-              <i class="fa fa-cart-plus text-lg text-white"></i>
+      <div class="menu-card">
+        <img src="./assets/xis guaderio.jpg" alt="Xis Gaudério" />
+        <div class="menu-card-body">
+          <span class="brush-banner green">Xis Gaudério</span>
+          <p class="menu-card-desc">Frango, bacon, coração, ovo, queijo cheddar, alface, milho e ervilha.</p>
+          <div class="menu-card-footer">
+            <p class="menu-price">10,00€</p>
+            <button class="add-btn add-to-cart-btn" data-name="Xis Gaudério" data-price="10.00">
+              <i class="fa fa-cart-plus"></i>
             </button>
           </div>
         </div>
@@ -146,22 +119,15 @@
       <!--FIM PRODUTO-->
 
       <!--INICIO PRODUTO-->
-      <div class="flex gap-2">
-        <img src="./assets/xis frango.jpg" alt=" Xis Frango"
-          class="w-28 h-28 rounded-md hover:scale-110 hover:rotate-2 duration-300" />
-
-        <div>
-          <p class="font-bold">Xis Frango</p>
-          <p class="texte-sm">
-           é preparado com pão especial e recheado com ingredientes frescos e saborosos:
-  alface crocante, tomate suculento, milho, ervilha, queijo derretido, frango ao molho suculento e ovo.
-  Uma combinação perfeita para uma experiência inesquecível a cada mordida!
-          </p>
-
-          <div class="flex items-center gap-2 justify-between mt-3">
-            <p class="font-bold text-lg">7.00€</p>
-            <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Xis Frango" data-price="7.00">
-              <i class="fa fa-cart-plus text-lg text-white"></i>
+      <div class="menu-card">
+        <img src="./assets/xis frango.jpg" alt="Xis Frango" />
+        <div class="menu-card-body">
+          <span class="brush-banner wine">Xis Frango</span>
+          <p class="menu-card-desc">Alface, tomate, milho, ervilha, queijo, frango ao molho e ovo.</p>
+          <div class="menu-card-footer">
+            <p class="menu-price">8,00€</p>
+            <button class="add-btn add-to-cart-btn" data-name="Xis Frango" data-price="8.00">
+              <i class="fa fa-cart-plus"></i>
             </button>
           </div>
         </div>
@@ -169,21 +135,79 @@
       <!--FIM PRODUTO-->
 
       <!--INICIO PRODUTO-->
-      <div class="flex gap-2">
-        <img src="./assets/xis coracao.jpg" alt=" Xis coração"
-          class="w-28 h-28 rounded-md hover:scale-110 hover:rotate-2 duration-300" />
+      <div class="menu-card">
+        <img src="./assets/Xis Iscas com Cebola Caramelizada.jpg" alt="Xis Iscas com Cebola Caramelizada" />
+        <div class="menu-card-body">
+          <span class="brush-banner green">Xis Iscas com Cebola Caramelizada</span>
+          <p class="menu-card-desc">Iscas de carne bovina, ovo, queijo, alface, milho, ervilha e cebola caramelizada.</p>
+          <div class="menu-card-footer">
+            <p class="menu-price">11,00€</p>
+            <button class="add-btn add-to-cart-btn" data-name="Xis Iscas com Cebola Caramelizada" data-price="11.00">
+              <i class="fa fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!--FIM PRODUTO-->
 
-        <div>
-          <p class="font-bold">Xis coração</p>
-          <p class="texte-sm"> é preparado com pão especial e recheado com ingredientes frescos e saborosos:
-  alface crocante, tomate suculento, milho, ervilha, queijo derretido, coração na chapa e ovo.
-  Uma combinação perfeita para uma experiência inesquecível a cada mordida!
-          </p>
+      <!--INICIO PRODUTO-->
+      <div class="menu-card">
+        <img src="./assets/xis calabresa.jpg" alt="Xis Bacon" />
+        <div class="menu-card-body">
+          <span class="brush-banner wine">Xis Bacon</span>
+          <p class="menu-card-desc">Alface, tomate, milho, ervilha, queijo, bife artesanal, bacon na chapa e ovo.</p>
+          <div class="menu-card-footer">
+            <p class="menu-price">10,00€</p>
+            <button class="add-btn add-to-cart-btn" data-name="Xis Bacon" data-price="10.00">
+              <i class="fa fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!--FIM PRODUTO-->
 
-          <div class="flex items-center gap-2 justify-between mt-3">
-            <p class="font-bold text-lg">7.00€</p>
-            <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Xis coração" data-price="7.00">
-              <i class="fa fa-cart-plus text-lg text-white"></i>
+      <!--INICIO PRODUTO-->
+      <div class="menu-card">
+        <img src="./assets/Xis Strogonoff.jpg" alt="Xis Strogonoff" />
+        <div class="menu-card-body">
+          <span class="brush-banner green">Xis Strogonoff</span>
+          <p class="menu-card-desc">Carne bovina, champignon, creme de leite, ovo, queijo, alface, milho e ervilha.</p>
+          <div class="menu-card-footer">
+            <p class="menu-price">11,00€</p>
+            <button class="add-btn add-to-cart-btn" data-name="Xis Strogonoff" data-price="11.00">
+              <i class="fa fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!--FIM PRODUTO-->
+
+      <!--INICIO PRODUTO-->
+      <div class="menu-card">
+        <img src="./assets/xis coracao.jpg" alt="Xis coração" />
+        <div class="menu-card-body">
+          <span class="brush-banner wine">Xis Coração</span>
+          <p class="menu-card-desc">Alface, tomate, milho, ervilha, queijo, coração na chapa e ovo.</p>
+          <div class="menu-card-footer">
+            <p class="menu-price">8,00€</p>
+            <button class="add-btn add-to-cart-btn" data-name="Xis Coração" data-price="8.00">
+              <i class="fa fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!--FIM PRODUTO-->
+
+      <!--INICIO PRODUTO-->
+      <div class="menu-card">
+       <img src="./assets/xis costela.jpg" alt="Xis Costela" />
+        <div class="menu-card-body">
+          <span class="brush-banner green">Xis Costela</span>
+          <p class="menu-card-desc">Queijo, ovo, alface, milho, ervilha, mostarda, ketchup, maionese e suculenta costela.</p>
+          <div class="menu-card-footer">
+            <p class="menu-price">12,00€</p>
+            <button class="add-btn add-to-cart-btn" data-name="Xis Costela" data-price="12.00">
+              <i class="fa fa-cart-plus"></i>
             </button>
           </div>
         </div>
@@ -191,76 +215,91 @@
       <!--FIM PRODUTO-->
     </main>
 
-    <div class="mx-auto max-w-7xl px-2 my-2">
-      <h2 class="font-bold text-3xl">Bebidas</h2>
+    <!-- Todos acompanham -->
+    <div class="accompany">
+      <div class="star-divider"><span class="s1">★</span><span class="s2">★</span><span class="s3">★</span></div>
+      <p class="font-display accompany-title">TODOS ACOMPANHAM</p>
+      <div class="accompany-list">
+        <span><i class="fa fa-jar" style="color:var(--green)"></i> Maionese Caseira</span>
+        <span><i class="fa fa-bottle-droplet" style="color:var(--wine)"></i> Ketchup</span>
+        <span><i class="fa fa-bottle-droplet" style="color:var(--gold)"></i> Mostarda</span>
+      </div>
     </div>
 
-    <!--GRID BEBIDAS-->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16" id="menu">
-      <!-- BEBIDA ITEM -->
-      <div class="flex gap-2 w-full">
-        <img src="./assets/refri-1.png" alt=" Coca-Lata"
-          class="w-28 h-28 rounded-md hover:scale-110 hover:rotate-2 duration-300" />
-
-        <div>
-          <p class="font-bold">Coca-Lata</p>
-
-          <div class="flex items-center gap-2 justify-between mt-3">
-            <p class="font-bold text-lg">2.00€</p>
-            <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Coca-Lata" data-price="8.90">
-              <i class="fa fa-cart-plus text-lg text-white"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- BEBIDA FIM-->
-
-      <!-- BEBIDA ITEM -->
-      <div class="flex gap-2 w-full">
-        <img src="./assets/refri-2.png" alt=" Guarana-Lata"
-          class="w-28 h-28 rounded-md hover:scale-110 hover:rotate-2 duration-300" />
-
-        <div>
-          <p class="font-bold">Guarana-Lata</p>
-
-          <div class="flex items-center gap-2 justify-between mt-3">
-            <p class="font-bold text-lg">2.00€</p>
-            <button class="bg-gray-900 px-5 rounded add-to-cart-btn" data-name="Guarana-Lata" data-price="5.90">
-              <i class="fa fa-cart-plus text-lg text-white"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- BEBIDA FIM-->
+    <!--INICIO BEBIDAS-->
+    <div class="drinks-title">
+      <h2 class="font-display">Bebidas</h2>
+      <p>Indisponível no momento</p>
     </div>
 
-    <!--FIM GRID BEBIDAS-->
+    <div class="drinks-grid" id="bebidas">
+      <div class="drink-card">
+        <img src="./assets/refri-1.png" alt="Coca-Lata" />
+        <div>
+          <p class="drink-card-name">Coca-Lata</p>
+          <span class="unavailable-tag">Indisponível</span>
+        </div>
+      </div>
+
+      <div class="drink-card">
+        <img src="./assets/refri-2.png" alt="Guaraná-Lata" />
+        <div>
+          <p class="drink-card-name">Guarana-Lata</p>
+          <span class="unavailable-tag">Indisponível</span>
+        </div>
+      </div>
+    </div>
+    <!--FIM BEBIDAS-->
   </div>
   <!--FIM MENU-->
 
+  <!--INICIO CONTACTOS-->
+  <section class="contact-section">
+    <span class="brush-banner wine">FALA CONNOSCO</span>
+    <h2 class="font-display section-title">Siga-nos</h2>
+
+    <div class="contact-body">
+      <div class="contact-links">
+        <a href="https://instagram.com/xisgauchoportugal" target="_blank" rel="noopener" class="contact-btn wine">
+          <i class="fa-brands fa-instagram"></i> @xisgauchoportugal
+        </a>
+        <a href="https://www.facebook.com/share/1EP5TETi6b/?mibextid=wwXIfr" target="_blank" rel="noopener" class="contact-btn green">
+          <i class="fa-brands fa-facebook"></i> Xis Gaúcho Portugal
+        </a>
+        <a href="https://wa.me/351961620295" target="_blank" rel="noopener" class="contact-btn gold">
+          <i class="fa-brands fa-whatsapp"></i> 961 620 295
+        </a>
+      </div>
+
+      <div class="qr-card">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&color=2b1e14&bgcolor=fff8ea&data=https://instagram.com/xisgauchoportugal" alt="QR Code para o Instagram do Xis Gaúcho" />
+        <p>Aponte a câmara para nos seguir</p>
+      </div>
+    </div>
+  </section>
+  <!--FIM CONTACTOS-->
+
   <!--MODAL CART -->
+  <div class="cart-overlay" id="cart-modal">
+    <div class="cart-box">
+      <h2 class="font-display cart-title">Meu Carrinho</h2>
+      <div class="star-divider" style="max-width:140px;"><span class="s1">★</span><span class="s2">★</span><span class="s3">★</span></div>
 
-  <div class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] items-center justify-center hidden" id="cart-modal">
-    <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]">
-      <h2 class="text-center font-bold text-2xl mb-2">Meu carrinho</h2>
-
-      <div id="cart-items" class="flex justify-between mb-2 flex-col">
+      <div id="cart-items" style="display:flex; flex-direction:column; gap:0.9rem;">
         <!-- Itens do carrinho serão inseridos aqui via JS -->
       </div>
 
-      <p class="font-bold">Total: <span id="cart-total">0.00</span></p>
+      <p class="cart-total">Total: <span id="cart-total">0.00</span></p>
 
-      <p class="font-bold mt-4">Endereço de entrega:</p>
-      <input type="text" placeholder="Digite seu endereço completo..." id="address"
-        class="w-full border p-1 rounded my-1" />
+      <p class="cart-label">Endereço de entrega:</p>
+      <input type="text" placeholder="Digite seu endereço completo..." id="address" class="cart-input" />
 
-      <p class="text-red-500 hidden" id="address-warn">
-        Digite seu endereço completo!
-      </p>
+      <p class="cart-warn hidden" id="address-warn">Digite seu endereço completo!</p>
 
-      <div class="flex items-center justify-between mt-5 w-full">
-        <button id="close-modal-btn">Fechar</button>
-        <button id="checkout-btn" class="bg-green-500 text-white px-4 py-1 rounded">
+      <div class="cart-actions">
+        <button id="close-modal-btn" class="btn-outline">Fechar</button>
+        <button id="checkout-btn" class="btn-primary">
+          <i class="fa-brands fa-whatsapp"></i>
           Finalizar pedido
         </button>
       </div>
@@ -269,10 +308,10 @@
   <!--FIM MODAL CART -->
 
   <!--BUTTON CART FOOTER-->
-  <footer class="w-full bg-red-500 py-3 fixed bottom-0 z-40 flex items-center justify-center">
-    <button class="flex items-center gap-2 text-white font-bold" id="cart-btn">
+  <footer class="cart-footer-bar">
+    <button class="cart-footer-btn" id="cart-btn">
       (<span id="cart-count">0</span>) Veja meu carrinho
-      <i class="fa fa-cart-plus text-lg text-white"></i>
+      <i class="fa fa-cart-plus"></i>
     </button>
   </footer>
   <!--FIM BUTTON CART FOOTER-->

@@ -1024,6 +1024,39 @@ a:focus-visible {
 
 .hidden { display: none; }
 
+/* Os avisos não podem bloquear toques nos botões do cardápio em telas pequenas. */
+.toastify { pointer-events: none; }
+
+/* Área mínima de toque recomendada para telemóveis. */
+.top-bar-socials a,
+.cta-btn,
+.add-btn,
+.remove-from-cart-btn,
+.cart-footer-btn,
+.btn-outline,
+.btn-primary,
+.cart-input {
+  min-height: 44px;
+}
+
+.top-bar-socials a,
+.add-btn,
+.cart-footer-btn,
+.remove-from-cart-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-btn {
+  min-width: 44px;
+}
+
+.remove-from-cart-btn {
+  min-width: 44px;
+  padding: 0.5rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
@@ -1266,4 +1299,106 @@ a:focus-visible {
   font-family: "Caveat", cursive;
   font-size: 1rem;
   margin-left: 0.2rem;
+}
+
+
+/* ===================== TESTE / ROBUSTEZ MOBILE ===================== */
+.add-btn {
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+}
+
+.remove-from-cart-btn {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.45rem 0.5rem;
+}
+
+.btn-outline,
+.btn-primary,
+.cart-footer-btn {
+  min-height: 44px;
+}
+
+.top-bar-socials a {
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-item-details {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.cart-item-row {
+  gap: 0.75rem;
+}
+
+.item-name {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.fallback-toast {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translate(-50%, -12px);
+  z-index: 10000;
+  max-width: calc(100vw - 2rem);
+  padding: 0.8rem 1rem;
+  border-radius: 0.65rem;
+  background: var(--wine);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+  text-align: center;
+}
+
+.fallback-toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 479px) {
+  .cart-box {
+    padding: 1rem;
+    max-height: 88vh;
+  }
+
+  .cart-actions {
+    align-items: stretch;
+  }
+
+  .cart-actions > button {
+    flex: 1 1 140px;
+    justify-content: center;
+  }
+
+  .menu-card {
+    gap: 0.65rem;
+    padding: 0.75rem;
+  }
+
+  .menu-card-desc {
+    overflow-wrap: anywhere;
+  }
+
+  .hours-pill {
+    max-width: calc(100vw - 2rem);
+  }
+
+  .hours-pill span {
+    white-space: normal;
+    text-align: center;
+  }
 }

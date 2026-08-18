@@ -4,15 +4,87 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <title>Xis Gaúcho | O verdadeiro sabor do Sul em Tondela</title>
+  <meta
+    name="description"
+    content="Xis Gaúcho em Tondela, Portugal: lanches prensados, feitos na hora, para take-away e entrega. Veja o cardápio e faça o seu pedido."
+  />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://xisdogaucho.netlify.app/" />
+
+  <!-- Prévia para WhatsApp, Facebook, Instagram e LinkedIn -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Xis do Gaúcho - O melhor Xis Gaúcho em Portugal!" />
-  <meta property="og:image" content="https://xisdogaucho.netlify.app//assets/xis do gaucho.jpg" />
-  <meta property="og:description" content="O melhor Xis Gaúcho em Portugal!" />
-  <meta property="og:site_name" content="Xis do Gaúcho" />
+  <meta property="og:locale" content="pt_PT" />
+  <meta property="og:url" content="https://xisdogaucho.netlify.app/" />
+  <meta property="og:site_name" content="Xis Gaúcho" />
+  <meta
+    property="og:title"
+    content="Xis Gaúcho | O verdadeiro sabor do Sul em Tondela"
+  />
+  <meta
+    property="og:description"
+    content="Lanches prensados, feitos na hora, para take-away e entrega. Veja o nosso cardápio!"
+  />
+  <meta
+    property="og:image"
+    content="https://xisdogaucho.netlify.app/assets/xis%20do%20gaucho.jpg"
+  />
+  <meta
+    property="og:image:secure_url"
+    content="https://xisdogaucho.netlify.app/assets/xis%20do%20gaucho.jpg"
+  />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:alt" content="Xis Gaúcho — O verdadeiro sabor do Sul em Portugal" />
+
+  <!-- Prévia para X/Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta
+    name="twitter:title"
+    content="Xis Gaúcho | O verdadeiro sabor do Sul em Tondela"
+  />
+  <meta
+    name="twitter:description"
+    content="Lanches prensados, feitos na hora, para take-away e entrega."
+  />
+  <meta
+    name="twitter:image"
+    content="https://xisdogaucho.netlify.app/assets/xis%20do%20gaucho.jpg"
+  />
+
+  <!-- Dados para o Google -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FoodEstablishment",
+      "name": "Xis Gaúcho",
+      "description": "Lanches prensados, feitos na hora, para take-away e entrega em Tondela, Portugal.",
+      "url": "https://xisdogaucho.netlify.app/",
+      "image": "https://xisdogaucho.netlify.app/assets/xis%20do%20gaucho.jpg",
+      "telephone": "+351961620295",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Tondela",
+        "addressCountry": "PT"
+      },
+      "sameAs": [
+        "https://instagram.com/xisgauchoportugal"
+      ]
+    }
+  </script>
+
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 
   <link rel="stylesheet" href="./styles/output.css" />
   <link rel="stylesheet" href="./styles/custom.css" />
@@ -21,9 +93,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap"
-    rel="stylesheet" />
-
-  <title>XIS GAÚCHO</title>
+    rel="stylesheet"
+  />
 </head>
 
 <body class="paper-texture">
@@ -189,7 +260,13 @@
           <p class="menu-card-desc">Alface, tomate, milho, ervilha, queijo, bife artesanal, presunto e ovo.</p>
           <div class="menu-card-footer">
             <p class="menu-price">9,50€</p>
-            <button class="add-btn add-to-cart-btn" data-name="Xis Carne" data-price="9.50">
+            <button
+  type="button"
+  class="add-btn add-to-cart-btn"
+  data-name="Xis Carne"
+  data-price="9.50"
+  aria-label="Adicionar Xis Carne ao carrinho"
+>
               <i class="fa fa-cart-plus"></i>
             </button>
           </div>
@@ -205,13 +282,20 @@
           <p class="menu-card-desc">Frango, bacon, coração, ovo, queijo cheddar, alface, milho e ervilha.</p>
           <div class="menu-card-footer">
             <p class="menu-price">10,00€</p>
-            <button class="add-btn add-to-cart-btn" data-name="Xis Gaudério" data-price="10.00">
+          <button
+  type="button"
+  class="add-btn add-to-cart-btn"
+  data-name="Xis Carne"
+  data-price="9.50"
+  aria-label="Adicionar Xis Carne ao carrinho"
+>
               <i class="fa fa-cart-plus"></i>
             </button>
           </div>
         </div>
       </div>
       <!--FIM PRODUTO-->
+      
 
       <!--INICIO PRODUTO-->
       <div class="menu-card">
@@ -221,7 +305,13 @@
           <p class="menu-card-desc">Alface, tomate, milho, ervilha, queijo, frango ao molho e ovo.</p>
           <div class="menu-card-footer">
             <p class="menu-price">8,00€</p>
-            <button class="add-btn add-to-cart-btn" data-name="Xis Frango" data-price="8.00">
+            <button
+  type="button"
+  class="add-btn add-to-cart-btn"
+  data-name="Xis Carne"
+  data-price="9.50"
+  aria-label="Adicionar Xis Carne ao carrinho"
+>
               <i class="fa fa-cart-plus"></i>
             </button>
           </div>
@@ -237,7 +327,13 @@
           <p class="menu-card-desc">Iscas de carne bovina, ovo, queijo, alface, milho, ervilha e cebola caramelizada.</p>
           <div class="menu-card-footer">
             <p class="menu-price">11,00€</p>
-            <button class="add-btn add-to-cart-btn" data-name="Xis Iscas com Cebola Caramelizada" data-price="11.00">
+            <button
+  type="button"
+  class="add-btn add-to-cart-btn"
+  data-name="Xis Carne"
+  data-price="9.50"
+  aria-label="Adicionar Xis Carne ao carrinho"
+>
               <i class="fa fa-cart-plus"></i>
             </button>
           </div>
@@ -253,7 +349,13 @@
           <p class="menu-card-desc">Alface, tomate, milho, ervilha, queijo, bife artesanal, bacon na chapa e ovo.</p>
           <div class="menu-card-footer">
             <p class="menu-price">10,00€</p>
-            <button class="add-btn add-to-cart-btn" data-name="Xis Bacon" data-price="10.00">
+           <button
+  type="button"
+  class="add-btn add-to-cart-btn"
+  data-name="Xis Carne"
+  data-price="9.50"
+  aria-label="Adicionar Xis Carne ao carrinho"
+>
               <i class="fa fa-cart-plus"></i>
             </button>
           </div>
@@ -269,7 +371,13 @@
           <p class="menu-card-desc">Carne bovina, champignon, creme de leite, ovo, queijo, alface, milho e ervilha.</p>
           <div class="menu-card-footer">
             <p class="menu-price">11,00€</p>
-            <button class="add-btn add-to-cart-btn" data-name="Xis Strogonoff" data-price="11.00">
+           <button
+  type="button"
+  class="add-btn add-to-cart-btn"
+  data-name="Xis Carne"
+  data-price="9.50"
+  aria-label="Adicionar Xis Carne ao carrinho"
+>
               <i class="fa fa-cart-plus"></i>
             </button>
           </div>
@@ -285,7 +393,13 @@
           <p class="menu-card-desc">Alface, tomate, milho, ervilha, queijo, coração na chapa e ovo.</p>
           <div class="menu-card-footer">
             <p class="menu-price">8,00€</p>
-            <button class="add-btn add-to-cart-btn" data-name="Xis Coração" data-price="8.00">
+           <button
+  type="button"
+  class="add-btn add-to-cart-btn"
+  data-name="Xis Carne"
+  data-price="9.50"
+  aria-label="Adicionar Xis Carne ao carrinho"
+>
               <i class="fa fa-cart-plus"></i>
             </button>
           </div>
@@ -301,7 +415,13 @@
           <p class="menu-card-desc">Queijo, ovo, alface, milho, ervilha, mostarda, ketchup, maionese e suculenta costela.</p>
           <div class="menu-card-footer">
             <p class="menu-price">12,00€</p>
-            <button class="add-btn add-to-cart-btn" data-name="Xis Costela" data-price="12.00">
+            <button
+  type="button"
+  class="add-btn add-to-cart-btn"
+  data-name="Xis Costela"
+  data-price="12.00"
+  aria-label="Adicionar Xis Costela ao carrinho"
+>
               <i class="fa fa-cart-plus"></i>
             </button>
           </div>

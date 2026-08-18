@@ -1390,8 +1390,10 @@ a:focus-visible {
   }
 
   .menu-card-desc {
-    overflow-wrap: anywhere;
-  }
+    font-size: 0.95rem;
+    color: rgba(43, 30, 20, 0.85);
+    line-height: 1.45;
+}
 
   .hours-pill {
     max-width: calc(100vw - 2rem);
@@ -1401,4 +1403,108 @@ a:focus-visible {
     white-space: normal;
     text-align: center;
   }
+}
+
+
+/* =========================================
+   CORES DOS PRODUTOS
+   VERMELHO → VERDE → VERMELHO → VERDE
+========================================= */
+
+.menu-grid .menu-card:nth-child(odd) .brush-banner {
+    background: var(--wine) !important;
+}
+
+.menu-grid .menu-card:nth-child(even) .brush-banner {
+    background: var(--green) !important;
+}
+
+/* Descrição dos produtos */
+.menu-card-desc {
+    font-size: 0.95rem;
+    line-height: 1.45;
+}
+
+/* Celular */
+@media (max-width: 479px) {
+    .menu-card-desc {
+        font-size: 0.95rem;
+        line-height: 1.45;
+    }
+}
+
+/* =========================================
+   MELHOR LEITURA NO CELULAR
+========================================= */
+
+@media (max-width: 479px) {
+
+    /* Nome do produto */
+    .brush-banner {
+        font-size: 0.95rem !important;
+        line-height: 1.2;
+    }
+
+    /* Descrição / ingredientes */
+    .menu-card-desc {
+        font-size: 0.92rem !important;
+        line-height: 1.4 !important;
+    }
+
+    /* Preço */
+    .menu-card-price {
+        font-size: 1.15rem !important;
+    }
+
+    /* Um pouco mais de espaço dentro do card */
+    .menu-card {
+        padding: 0.85rem !important;
+        gap: 0.75rem;
+    }
+}
+
+/* ==========================================
+   AJUSTE FINAL DO CARDÁPIO
+   CORES + TEXTO MOBILE
+========================================== */
+
+/* CORES INTERCALADAS DOS PRODUTOS */
+.menu-grid .menu-card:nth-child(odd) .brush-banner {
+    background-color: var(--wine) !important;
+}
+
+.menu-grid .menu-card:nth-child(even) .brush-banner {
+    background-color: var(--green) !important;
+}
+
+
+/* DESCRIÇÃO NORMAL */
+.menu-card .menu-card-desc {
+    font-size: 0.95rem !important;
+    line-height: 1.45 !important;
+}
+
+
+/* MOBILE */
+@media screen and (max-width: 479px) {
+
+    .menu-card .menu-card-desc {
+        font-size: 1rem !important;
+        line-height: 1.45 !important;
+    }
+
+    .menu-card .brush-banner {
+        font-size: 0.9rem !important;
+    }
+
+    .menu-card {
+        padding: 0.8rem !important;
+        gap: 0.7rem !important;
+    }
+
+    .menu-card img,
+    .menu-card .placeholder-thumb {
+        width: 84px !important;
+        height: 84px !important;
+    }
 }
